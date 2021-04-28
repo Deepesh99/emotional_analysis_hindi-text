@@ -50,7 +50,9 @@ def preprocessing_hi(text_hi):
               #tweet_hi.append(token.lemma_)
               tweet_hi.append(token)
     print(tweet_hi)
-    tweet = ' '.join([token  for token in tweet_hi])
+    print(type(tweet_hi[0]))
+    sep = ' '
+    tweet = sep.join(tweet_hi)
     print("tweet",type(tweet))
     print(tweet)
     
