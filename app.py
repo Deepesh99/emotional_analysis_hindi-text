@@ -26,6 +26,7 @@ def predict():
     data = request.get_json(force=True)
     sent = data['comment']
     print("sent",type(sent))
+    #print(sent)
     res={}
     print("res",type(res))
     af_pre=preprocessing_hi(sent)
@@ -47,6 +48,7 @@ def preprocessing_hi(text_hi):
     for token in tokenized_text:
         if(token.text!='\n\n' and not token.is_stop and not token.is_punct and not token.is_space and not token.like_email and not token.is_digit and not token.is_quote and not token.is_alpha and not token.like_url):
               tweet_hi.append(token.lemma_)  
+    print(tweet_hi)
     tweet = ' '.join([token  for token in tweet_hi])
     print("tweet",type(tweet))
     print(tweet)
