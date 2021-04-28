@@ -8,8 +8,31 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS 
 nlp_hi = Hindi()
 
+app = Flask(__name__)
 
-    
+#CORS
+CORS(app)
+cors = CORS(app, resources={
+    r"/*": {
+        "origins": "*"
+    }
+})
+
+#routes    
+@app.route('/', methods=['POST'])
+def predict():
+  # get data
+  data = request.get_json(force=True)
+  sent = data['comment']
+  res={}
+  af_pre=preprocessing_hi(sent)
+  print(af_pre)
+  res['after']=af_pre
+  res['before']=sent
+                
+  return jsonify(res)
+
+
 def preprocessing_hi(text_hi):
   tweet_hi = []
   tokenized_text = nlp_hi(text_hi)
@@ -25,30 +48,6 @@ def preprocessing_hi(text_hi):
         and not token.like_url):
       tweet_hi.append(token.lemma_)  
   tweet = ' '.join([token  for token in tweet_hi])
-   
   return tweet
-app = Flask(__name__)
-CORS(app)
-cors = CORS(app, resources={
-    r"/*": {
-        "origins": "*"
-    }
-})
-# routes
-    
-@app.route('/', methods=['POST'])
-#@crossdomain(origin='*')
-def predict():
-    
-    # get data
-  data = request.get_json(force=True)
-  sent = data['comment']
-  res={}
-  af_pre=preprocessing_hi(sent)
-  print(af_pre)
-  res['after']=af_pre
-  res['before']=sent
-                
-  return jsonify(res)
 if __name__ == "__main__":
     app.run(port = 5000, debug=True)
