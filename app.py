@@ -21,16 +21,17 @@ cors = CORS(app, resources={
 #routes    
 @app.route('/', methods=['POST'])
 def predict():
-  # get data
-  data = request.get_json(force=True)
-  sent = data['comment']
-  res={}
-  af_pre=preprocessing_hi(sent)
-  print(af_pre)
-  res['after']=af_pre
-  res['before']=sent
-                
-  return jsonify(res)
+      
+    # get data
+    data = request.get_json(force=True)
+    sent = data['comment']
+    res={}
+    af_pre=preprocessing_hi(sent)
+    print(af_pre)
+    print("hello")
+    res['after']=af_pre
+    res['before']=sent
+    return jsonify(res)
 
 
 def preprocessing_hi(text_hi):
