@@ -48,7 +48,7 @@ def preprocessing_hi(text_hi):
     for token in tokenized_text:
         if(token.text!='\n\n' and not token.is_stop and not token.is_punct and not token.is_space and not token.like_email and not token.is_digit and not token.is_quote and not token.is_alpha and not token.like_url):
               #tweet_hi.append(token.lemma_)
-              tweet_hi.append(token)
+              tweet_hi.append(str(token))
     print(tweet_hi)
     print(type(tweet_hi[0]))
     sep = ' '
