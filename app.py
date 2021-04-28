@@ -47,8 +47,12 @@ def preprocessing_hi(text_hi):
         and not token.is_quote
         and not token.is_alpha
         and not token.like_url):
-      tweet_hi.append(token.lemma_)  
+        
+        tweet_hi.append(token.lemma_)  
   tweet = ' '.join([token  for token in tweet_hi])
+
+  print(tweet)
+  print(type(tweet))
   return tweet
 if __name__ == "__main__":
     app.run(port = 5000, debug=True)
